@@ -1,17 +1,24 @@
 const board = document.querySelector('.board');
+const allBoxes = document.querySelectorAll('.board-box');
+const allBoxesArray = Array.from(allBoxes);
+const resetButton = document.querySelector('.restart');
+const results = document.querySelector('.results');
 
 let winner = false;
+let winnerName;
 let currentPlayer = 0;
 
 const gameBoard = (function () {
-  const board = new Array(9).fill(null);
+  let board = new Array(9).fill(null);
 
-  function changePlayer() {}
+  function reset() {
+    board = new Array(9).fill(null);
+    winner = false;
+    winnerName;
+    currentPlayer = 0;
+  }
 
   function showBoard() {
-    console.log(`${board[0]} ${board[1]} ${board[2]}\n
-                  ${board[3]} ${board[4]} ${board[5]}\n
-                  ${board[6]} ${board[7]} ${board[8]}`);
     return board;
   }
 
@@ -29,8 +36,18 @@ const gameBoard = (function () {
 
     if (boardWin) {
       winner = true;
-      console.log(`${marker} wins`);
-      return;
+
+      if (marker === 'X') {
+        winnerName = 'Player 1';
+      } else {
+        winnerName = 'Player 2';
+      }
+
+      return `${winnerName} wins`;
+    } else if (!boardWin && board.every(marker => marker !== null)) {
+      winnerName = 'Tie';
+
+      return winnerName;
     }
   }
 
@@ -42,7 +59,7 @@ const gameBoard = (function () {
     board.splice(index, 1, marker);
   }
 
-  return { playMarker, win, showBoard };
+  return { playMarker, win, showBoard, reset };
 })();
 
 function createPlayer(marker) {
@@ -53,24 +70,25 @@ function createPlayer(marker) {
   return { printMarker, marker };
 }
 
-function playGame() {
+function playGame(index) {
   if (winner) {
     return;
   }
 
   if (currentPlayer == 0) {
-    const userAIndex = Number(prompt('User A'));
-    gameBoard.playMarker(markerX, userAIndex);
+    gameBoard.playMarker(markerX, index);
     gameBoard.win(markerX);
-    console.log(gameBoard.showBoard());
+
     currentPlayer = 1;
   } else {
-    const userBIndex = Number(prompt('User B'));
-    gameBoard.playMarker(markerO, userBIndex);
-    console.log(gameBoard.showBoard());
+    gameBoard.playMarker(markerO, index);
+
     gameBoard.win(markerO);
     currentPlayer = 0;
   }
+
+  winner ? (results.textContent = `${winnerName} wins`) : '';
+  winnerName === 'Tie' ? (results.textContent = winnerName) : '';
 }
 
 const randomNumber = () => Math.floor(Math.random() * 9);
@@ -79,10 +97,25 @@ const randomNumber = () => Math.floor(Math.random() * 9);
 const { marker: markerX } = createPlayer('X');
 const { marker: markerO } = createPlayer('O');
 
-function handleBoardClick(event) {
-  const clickedElement = event.target;
+function displayController() {
+  const board = gameBoard.showBoard();
 
-  console.log(clickedElement);
+  for (let i = 0; i < allBoxesArray.length; i++) {
+    allBoxesArray[i].textContent = board[i];
+  }
+}
+
+function handleBoardClick(event) {
+  const clickedElementIndex = Number(event.target.dataset.value) || 0;
+
+  playGame(clickedElementIndex);
+
+  displayController();
 }
 
 board.addEventListener('click', handleBoardClick);
+resetButton.addEventListener('click', event => {
+  gameBoard.reset();
+  results.textContent = '';
+  displayController();
+});

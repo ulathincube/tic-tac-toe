@@ -76,12 +76,13 @@ h6 {
 
 html {
   font-size: 62.5%;
-  font-family: 'Reddit Sans', sans-serif;
+  font-family: 'Figtree', sans-serif;
 }
 
 body {
   font-size: 1.9rem;
   display: flex;
+  gap: 3rem;
   width: 100vw;
   height: 100vh;
   flex-direction: column;
@@ -106,4 +107,16 @@ body {
   align-items: center;
   font-size: 5rem;
   font-weight: 400;
+}
+
+.players {
+  display: flex;
+  font-size: 3rem;
+  justify-content: space-between;
+  gap: 5rem;
+}
+
+.results {
+  text-align: center;
+  font-size: 2.5rem;
 }

@@ -7,23 +7,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
   </head>
   <body>
+    <div class="details">
+      <div class="players">
+        <div class="user-a">Player 1 (X)</div>
+        <div class="user-b">Player 2 (O)</div>
+      </div>
+      <div class="results">&nbsp;</div>
+    </div>
     <div class="board">
-      <buttton data-value="0" class="board-box">X</buttton>
-      <buttton data-value="1" class="board-box">O</buttton>
-      <buttton data-value="2" class="board-box">&nbsp;</buttton>
-      <buttton data-value="3" class="board-box">&nbsp;</buttton>
-      <buttton data-value="4" class="board-box">&nbsp;</buttton>
-      <buttton data-value="5" class="board-box">&nbsp;</buttton>
-      <buttton data-value="6" class="board-box">&nbsp;</buttton>
-      <buttton data-value="7" class="board-box">&nbsp;</buttton>
-      <buttton data-value="8" class="board-box">&nbsp;</buttton>
+      <buttton data-value="0" class="board-box"></buttton>
+      <buttton data-value="1" class="board-box"></buttton>
+      <buttton data-value="2" class="board-box"></buttton>
+      <buttton data-value="3" class="board-box"></buttton>
+      <buttton data-value="4" class="board-box"></buttton>
+      <buttton data-value="5" class="board-box"></buttton>
+      <buttton data-value="6" class="board-box"></buttton>
+      <buttton data-value="7" class="board-box"></buttton>
+      <buttton data-value="8" class="board-box"></buttton>
+    </div>
+    <div class="controls">
+      <button class="restart">Restart Game</button>
     </div>
   </body>
 </html>
