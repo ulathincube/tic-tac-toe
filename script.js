@@ -1,3 +1,5 @@
+const board = document.querySelector('.board');
+
 let winner = false;
 let currentPlayer = 0;
 
@@ -77,6 +79,10 @@ const randomNumber = () => Math.floor(Math.random() * 9);
 const { marker: markerX } = createPlayer('X');
 const { marker: markerO } = createPlayer('O');
 
-for (let i = 0; i < 9; i++) {
-  playGame();
+function handleBoardClick(event) {
+  const clickedElement = event.target;
+
+  console.log(clickedElement);
 }
+
+board.addEventListener('click', handleBoardClick);
